@@ -12,6 +12,7 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
+        console.log('posted')
         callback(null);
       }
     })

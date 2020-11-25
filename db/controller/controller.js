@@ -2,6 +2,7 @@ var model = require('../models/model.js')
 
 module.exports = {
   post: function(req, res) {
+    console.log(req.body)
     model.addStock(req.body, (err) => {
       if (err) {
         console.log('error posting')

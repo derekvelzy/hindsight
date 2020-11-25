@@ -1,11 +1,11 @@
 const router = require('express').Router();
-// const controller = require('../db/controller/controller.js');
+const controller = require('../db/controller/controller.js');
 // const dateController = require('../db/controller/dateController.js');
 
 // routes
-// router.post('/requests', controller.post);
+router.post('/requests', controller.post);
 
-// router.get('/requests', controller.get);
+router.get('/requests', controller.get);
 
 // router.put('/requests', controller.put);
 

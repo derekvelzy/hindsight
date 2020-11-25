@@ -1,0 +1,158 @@
+body {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.pos {
+  color: rgb(133, 189, 156);
+}
+
+.neg {
+  color: rgb(196, 87, 111);
+}
+
+.container {
+  width: 1320px;
+  margin: 0 auto;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col1 {
+  width: 30%;
+  height: auto;
+  margin-right: 20px;
+  border: 1px solid black;
+}
+
+.col2 {
+  width: 45%;
+  margin-right: 20px;
+  border: 1px solid black;
+}
+
+.col3 {
+  width: 25%;
+  height: 680px;
+  border-bottom: 1px solid black;
+}
+
+/*
+  Header
+  ==============================================
+*/
+
+.header {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  color: white;
+  background-color: rgb(133, 189, 156);
+}
+
+/*
+  Search
+  ==============================================
+*/
+
+.searchResults {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.searchItem {
+  border: 1px solid black;
+}
+
+/*
+  Portfolio
+  ==============================================
+*/
+
+.list {
+  display: flex;
+  max-height: 300px;
+  overflow: scroll;
+  flex-direction: column;
+  border: 1px solid rgb(233, 233, 233);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 16px;
+}
+
+.listTitle {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.stockContainer {
+  border-bottom: 1px solid rgb(233, 233, 233);
+  padding: 0px 6px;
+  overflow: hidden;
+}
+
+.stock {
+  display: flex;
+  height: 55px;
+  align-items: center;
+}
+
+.openStock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.openStock:hover {
+  background: rgb(243, 243, 243);
+  transition: all .3s ease;
+}
+
+.stock:nth-last-child(1) {
+  border-bottom: none;
+}
+
+.portfolio {
+  margin-bottom: 40px;
+}
+
+.tradeStock {
+  width: '100px';
+  text-align: 'center';
+}
+
+.tradeContainer {
+
+}
+
+.tradeButton {
+  background: white;
+  border: none;
+  font-size: 13px;
+  padding: 13px 18px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tradeButton:hover {
+  transition: all .3s ease;
+  background: rgb(243, 243, 243);
+}
+
+.tradeButton:active {
+  font-size: 12px;
+  padding: 14px 19px;
+}
+
+.tradeButton:focus {
+  outline: none;
+}
+
+
+/*
+  Watchlist
+  ==============================================
+*/
