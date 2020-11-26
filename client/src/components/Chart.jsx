@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
 const Chart = (props) => {
-  const { plotData } = props;
-  console.log('re-render!')
+  const { plotData, chartView } = props;
+  const [time, setTime] = useState(99);
 
   if (plotData.length > 0) {
-    const start = plotData[0].price;
+    const timedPlotData = plotData.slice(99 - time)
+    const start = plotData[99 - time].price;
     const end = plotData[99].price;
+    const percent = (100 * ((end - start) / start)).toPrecision(2);
 
     return (
       <div className="graph">
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+          <div style={{ fontSize: '26px', margin: '0px 16px 16px 10px' }}>{chartView.ticker}</div>
+          <div>{chartView.name}</div>
+        </div>
         <ResponsiveContainer height={380}>
           <LineChart
             className="chart"
-            data={plotData}
+            data={timedPlotData}
             margin={{
-              top: 0, right: 0, left: -58, bottom: 30,
+              top: 0, right: 0, left: -58, bottom: 20,
             }}
           >
             <XAxis dataKey="name" />
@@ -27,6 +33,20 @@ const Chart = (props) => {
           <Line dataKey="price" stroke={end > start ? "#95bdae" : "#f09390"} dot={false} strokeWidth={2}/>
           </LineChart>
         </ResponsiveContainer>
+        <div className="timeline">
+          <div style={{ display: 'flex', alignItems: 'baseline' }}>
+            <div style={{ fontSize: '24px', margin: '0px 20px 0px 10px' }}>${end.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+            <div style={{ display: 'flex'}}>
+              <div>{percent > 0 ? <span className="pos">&#8599;</span> : <span className="neg">&#8600;</span>}</div>
+              <div style={{ marginLeft: '5px' }}>{percent}%</div>
+            </div>
+          </div>
+          <div>
+            <button className="timelineBut" style={{background: time === 7 ? 'rgb(235, 235, 235)' : ''}} onClick={() => setTime(7)}>1 week</button>
+            <button className="timelineBut" style={{background: time === 30 ? 'rgb(235, 235, 235)' : ''}} onClick={() => setTime(30)}>1 month</button>
+            <button className="timelineBut" style={{background: time === 99 ? 'rgb(235, 235, 235)' : ''}} onClick={() => setTime(99)}>3 months</button>
+          </div>
+        </div>
       </div>
     )
   } else {

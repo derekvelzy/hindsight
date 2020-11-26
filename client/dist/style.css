@@ -21,13 +21,12 @@ body {
 }
 
 .col1 {
-  width: 27%;
-  height: auto;
-  margin-right: 20px;
+  width: 23%;
+  margin-right: 30px;
 }
 
 .col2 {
-  width: 48%;
+  width: 52%;
   margin-right: 30px;
 }
 
@@ -71,16 +70,88 @@ body {
   ==============================================
 */
 
+.searchContainer {
+  margin: 0;
+  height: 30px;
+}
+
+.searchbar {
+  border: 2px solid rgb(194, 194, 194);
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 0px;
+}
+
+.searchbar:focus {
+  outline: none;
+}
+
 .searchResults {
   position: absolute;
+  width: 287px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  margin-top: -16px;
+  border: 1px solid rgb(194, 194, 194);
 }
 
 .searchItem {
-  border: 1px solid black;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(194, 194, 194);
+  padding: 5px 15px;
 }
+
+.searchItem:nth-last-child(1) {
+  border-bottom: none;
+}
+
+.searchItem:hover {
+  transition: all .3s ease;
+  cursor: pointer;
+  background: rgb(240, 240, 240);
+}
+
+/*
+  News
+  ==============================================
+*/
+
+.news {
+  margin-top: 40px;
+  border: 1px solid rgb(233, 233, 233);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 16px;
+}
+
+.feed {
+  max-height: 580px;
+  overflow: scroll;
+}
+
+.post {
+  display: flex;
+  background: white;
+  font-size: 14px;
+  padding: 7px 10px;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.postContent {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.postImage {
+  width: 40px;
+  margin-left: 20px;
+  border-radius: 10px;
+  border: 1px solid rgb(233, 233, 233);
+}
+
 
 /*
   Portfolio / Watchlist
@@ -89,7 +160,7 @@ body {
 
 .list {
   display: flex;
-  max-height: 300px;
+  max-height: 350px;
   overflow: scroll;
   flex-direction: column;
   border: 1px solid rgb(233, 233, 233);
@@ -115,7 +186,7 @@ body {
 }
 
 .vmpButton:hover {
-  background: rgb(245, 245, 245);
+  background: rgb(235, 235, 235);
 }
 
 .vmpButton:focus {
@@ -151,7 +222,7 @@ body {
 }
 
 .openStock:hover {
-  background: rgb(243, 243, 243);
+  background: rgb(235, 235, 235);
   transition: all .3s ease;
 }
 
@@ -212,7 +283,7 @@ body {
 
 .tradeButton:hover {
   transition: all .3s ease;
-  background: rgb(243, 243, 243);
+  background: rgb(235, 235, 235);
 }
 
 .tradeButton:active {
@@ -224,27 +295,66 @@ body {
   outline: none;
 }
 
+
 /*
-  Search
+  Chart
   ==============================================
 */
 
-.searchbar {
-  border: 2px solid rgb(194, 194, 194);
-  width: 100%;
-  height: 30px;
+.timeline {
+  display: flex;
+  justify-content: space-between;
 }
 
-.searchbar:focus {
+.timelineBut {
+  border: 1px solid rgb(194, 194, 194);
+  background: white;
+  padding: 5px 24px;
+  cursor: pointer;
+}
+
+.timelineBut:hover {
+  transition: all .3s ease;
+  background: rgb(235, 235, 235);
+}
+
+.timelineBut:focus {
   outline: none;
 }
 
-
 /*
-  News
+  Graph
   ==============================================
 */
 
-.news {
-  border: 1px solid black;
+.graph {
+  margin-bottom: 40px;
+}
+
+
+/*
+  Breakdown
+  ==============================================
+*/
+
+.pieChart {
+  margin-right: 60px;
+}
+
+.diversity {
+  font-size: 20px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  width: 375px;
+}
+
+.divLabels {
+  border-bottom: 1px solid rgb(185, 185, 185);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.breakdown {
+  display: flex;
 }

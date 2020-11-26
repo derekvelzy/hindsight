@@ -6,7 +6,6 @@ var MyChart = function() {
 
 MyChart.prototype.setData = function() {
   var arr = [];
-  console.log(arguments)
   if (arguments[0].length > 0) {
     for (let i = 0; i < arguments[0][0].data.length; i++) {
       arr.push({date: null, cost: 0});

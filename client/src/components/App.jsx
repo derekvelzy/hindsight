@@ -3,7 +3,6 @@ import Header from './Header.jsx';
 import Search from './Search.jsx';
 import News from './News.jsx';
 import Chart from './Chart.jsx';
-import Returns from './Returns.jsx';
 import Breakdown from './Breakdown.jsx';
 import MyStocks from './MyStocks.jsx';
 import Watchlist from './Watchlist.jsx';
@@ -16,6 +15,7 @@ const App = () => {
   const [portfolio, setPortfolio] = useState([]);  // holds objects of each stock I own
   const [watchlist, setWatchlist] = useState([]);  // holds objects of each stock in my watchlist
   const [chartView, setChartView] = useState({ ticker: 'My Portfolio', name: '' }); // ticker & name display on chart
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getAll();
@@ -58,7 +58,6 @@ const App = () => {
   const getMyPortfolio = (port) => {
     // Updates the values in my portfolio (called only by getAll)
     var chart = new MyChart();
-    console.log(port);
     chart.setData(port);
     setMyPlotData(chart);
     setChart(chart);
@@ -107,20 +106,17 @@ const App = () => {
     e.preventDefault();
 
     for (let i = 0; i < portfolio.length; i++) {
-      console.log(portfolio[i]);
       if (portfolio[i].ticker === stock.ticker) {
         let total = Number.parseInt(portfolio[i].shares) + Number.parseInt(value);
         if (total < 0) {
           total = 0;
         }
-        console.log('port', total);
         updateShares(stock.ticker, total)
       }
     }
     for (let i = 0; i < watchlist.length; i++) {
       if (watchlist[i].ticker === stock.ticker) {
         const total = Number.parseInt(value);
-        console.log('watch', total);
         updateShares(stock.ticker, total);
       }
     }
@@ -147,6 +143,7 @@ const App = () => {
   const setChart = (stock) => {
     const dataPoints = stock.data.map(point => {return {"name": point['date'].substring(5), "uv": point['cost'], "price": point['cost']}});
     setPlotData(dataPoints);
+    setChartView({ ticker: stock.ticker, name: stock.name })
     // Sets the data sent into the chart
   }
 
@@ -157,13 +154,12 @@ const App = () => {
       </div>
       <div className="columns container">
         <div className="col1">
-          <Search getStock={getStock} />
+          <Search getStock={getStock} search={search} setSearch={setSearch} />
           <News />
         </div>
         <div className="col2">
-          <Chart plotData={plotData} />
-          <Returns />
-          <Breakdown />
+          <Chart plotData={plotData} chartView={chartView} />
+          <Breakdown portfolio={portfolio} myPlotData={myPlotData} />
         </div>
         <div className="col3">
           <MyStocks portfolio={portfolio} setChart={setChart} addToPortfolio={addToPortfolio} removeFromPortfolio={removeFromPortfolio} myPlotData={myPlotData} />

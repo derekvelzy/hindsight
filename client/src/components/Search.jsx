@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import tickers from '../tickers/tickers.js'
 
 const Search = (props) => {
-  const { getStock } = props;
-  const [search, setSearch] = useState('')
+  const { getStock, search, setSearch } = props;
+  // const [search, setSearch] = useState('')
   const [filter, setFilter] = useState([]);
 
   const handleChange = (e) => {
@@ -27,19 +27,32 @@ const Search = (props) => {
               <div>{stock[0]}</div>
               <div>{stock[1]}</div>
             </div>
+            <div>
+              +
+            </div>
           </div>
         )
       })
-      setFilter(mapped);
+      if (mapped.length === 0) {
+        setFilter(
+          <div className="searchItem" onClick={() => getStock(stock)}>
+            <div>
+              <div>No Results</div>
+            </div>
+          </div>
+        )
+      } else {
+        setFilter(mapped);
+      }
     }
   }
 
   return (
-    <div>
+    <div className="searchContainer">
       <form autoComplete="off">
         <input className="searchbar" autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
       </form>
-      <div className="searchResults">
+      <div className="searchResults" style={{ display: search === '' ? 'none' : 'block'}}>
         {filter}
       </div>
     </div>
