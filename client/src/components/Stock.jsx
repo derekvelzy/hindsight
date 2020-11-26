@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
 const Stock = (props) => {
+  const { stock, setChart, addToPortfolio, type } = props;
+
   const [vis, setVis] = useState(false);
-  const { stock } = props;
+  const [buyVal, setBuyVal] = useState('');
+  const [sellVal, setSellVal] = useState('');
   const percent = (100 * ((stock.data[99].cost - stock.data[98].cost) / stock.data[98].cost)).toPrecision(2);
 
-  useEffect(() => {
+  const handleChange = (e, type) => {
+    if (type === 'b') {
+      setBuyVal(e.target.value);
+    } else {
+      setSellVal(e.target.value);
+    }
+  }
 
-  }, [vis])
+  const height = type === 'watchlist' ? '100px' : '130px';
 
   return (
-    <div className="stockContainer" style={{ height: vis ? '100px' : '55px', transition: 'all .3s ease' }}>
+    <div className="stockContainer" style={{ height: vis ? height : '55px', transition: 'all .3s ease' }}>
       <div className="stock">
         <div className="openStock">
-          <div style={{ width: '120px', marginLeft: '20px' }}>
+          <div style={{ width: '120px', marginLeft: '10px' }}>
             <div>{stock.ticker}</div>
-            <div>{stock.shares === '0' ? `${stock.shares} shares` : ''}</div>
+            <div>{stock.shares === 0 ? '' : `${stock.shares} shares`}</div>
           </div>
           <div style={{ width: '110px' }}>
             <div>${stock.data[99].cost}</div>
@@ -25,13 +34,26 @@ const Stock = (props) => {
             </div>
           </div>
         </div>
-        <div className="tradeStock">
-          <button className="tradeButton" onClick={() => setVis(!vis)}>trade</button>
+        <div className="tradeStock" onClick={() => {
+            if (!vis) {
+              setChart(stock)
+            }
+          }}>
+          <button className="tradeButton" onClick={() => setVis(!vis)}>{vis ? 'cancel' : 'trade'}</button>
         </div>
       </div>
       <div>
         <div className="tradeContainer">
-          Trade
+          <form autoComplete="off" className="tradeForm">
+            <div style={{ marginBottom: '5px' }}>
+              <input className="tradeInput" autoComplete="off" id="buy" type="text" value={buyVal} onChange={(e) => handleChange(e, 'b')}></input>
+              <button className="buyButton" onClick={(e) => addToPortfolio(e, stock, buyVal)}>buy</button>
+            </div>
+            <div style={{ display: type === 'watchlist' ? 'none' : 'block' }}>
+              <input className="tradeInput" autoComplete="off" id="sell" type="text" value={sellVal} onChange={(e) => handleChange(e, 's')}></input>
+              <button className="buyButton sellButton" onClick={(e) => addToPortfolio(e, stock, -1 * sellVal)}>sell</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

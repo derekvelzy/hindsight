@@ -37,7 +37,7 @@ const Search = (props) => {
   return (
     <div>
       <form autoComplete="off">
-        <input autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
+        <input className="searchbar" autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
       </form>
       <div className="searchResults">
         {filter}

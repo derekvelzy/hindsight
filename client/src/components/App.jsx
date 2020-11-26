@@ -7,6 +7,7 @@ import Returns from './Returns.jsx';
 import Breakdown from './Breakdown.jsx';
 import MyStocks from './MyStocks.jsx';
 import Watchlist from './Watchlist.jsx';
+import MyChart from '../myChart.js';
 const axios = require('axios');
 
 const App = () => {
@@ -47,12 +48,21 @@ const App = () => {
       }
       setPortfolio(myStocks);
       setWatchlist(myWatchlist);
+      return myStocks
+    })
+    .then((port) => {
+      getMyPortfolio(port);
     })
   }
 
-  // const getMyPortfolio = () => {
-  //   // Updates the values in my portfolio
-  // }
+  const getMyPortfolio = (port) => {
+    // Updates the values in my portfolio (called only by getAll)
+    var chart = new MyChart();
+    console.log(port);
+    chart.setData(port);
+    setMyPlotData(chart);
+    setChart(chart);
+  }
 
   const getStock = (stock) => {
     // Grabs the stock data using the alphavantage API
@@ -76,11 +86,11 @@ const App = () => {
       var currentPort = portfolio;
       currentPort.push(object);
       // Call addToPortfolio to send the stock to your database
-      addToPortfolio(object);
+      addToWatchlist(object);
     })
   }
 
-  const addToPortfolio = (stock) => {
+  const addToWatchlist = (stock) => {
     // Adds the stock data from the API request to my database
     axios({
       method: 'post',
@@ -93,18 +103,57 @@ const App = () => {
     })
   }
 
+  const addToPortfolio = (e, stock, value) => {
+    e.preventDefault();
+
+    for (let i = 0; i < portfolio.length; i++) {
+      console.log(portfolio[i]);
+      if (portfolio[i].ticker === stock.ticker) {
+        let total = Number.parseInt(portfolio[i].shares) + Number.parseInt(value);
+        if (total < 0) {
+          total = 0;
+        }
+        console.log('port', total);
+        updateShares(stock.ticker, total)
+      }
+    }
+    for (let i = 0; i < watchlist.length; i++) {
+      if (watchlist[i].ticker === stock.ticker) {
+        const total = Number.parseInt(value);
+        console.log('watch', total);
+        updateShares(stock.ticker, total);
+      }
+    }
+  }
+
+  const updateShares = (ticker, total) => {
+    axios({
+      method: 'patch',
+      url: 'http://localhost:8020/requests',
+      data: {
+        ticker: ticker,
+        amount: total
+      }
+    })
+    .then(() => {
+      getAll()
+    })
+  }
+
   const removeFromPortfolio = () => {
     // removes a stock from the portfolio
   }
 
   const setChart = (stock) => {
+    const dataPoints = stock.data.map(point => {return {"name": point['date'].substring(5), "uv": point['cost'], "price": point['cost']}});
+    setPlotData(dataPoints);
     // Sets the data sent into the chart
   }
 
   return (
     <div>
       <div className="header">
-        <Header />
+        <Header setChart={setChart} myPlotData={myPlotData} />
       </div>
       <div className="columns container">
         <div className="col1">
@@ -112,13 +161,13 @@ const App = () => {
           <News />
         </div>
         <div className="col2">
-          <Chart />
+          <Chart plotData={plotData} />
           <Returns />
           <Breakdown />
         </div>
         <div className="col3">
-          <MyStocks portfolio={portfolio}/>
-          <Watchlist watchlist={watchlist}/>
+          <MyStocks portfolio={portfolio} setChart={setChart} addToPortfolio={addToPortfolio} removeFromPortfolio={removeFromPortfolio} myPlotData={myPlotData} />
+          <Watchlist watchlist={watchlist} setChart={setChart} addToPortfolio={addToPortfolio} removeFromPortfolio={removeFromPortfolio} />
         </div>
       </div>
     </div>

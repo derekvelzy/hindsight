@@ -9,7 +9,7 @@ router.get('/requests', controller.get);
 
 // router.put('/requests', controller.put);
 
-// router.patch('/requests', controller.patch);
+router.patch('/requests', controller.patch);  // Updates the total shares
 
 // router.patch('/updates', controller.update);
 
