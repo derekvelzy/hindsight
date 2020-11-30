@@ -20,4 +20,8 @@ router.patch('/requests', controller.patch);  // Updates the total shares
 // // only meant to insert initial date through postman
 // router.post('/date', dateController.post);
 
+router.get('/next', (req, res) => {
+  res.redirect('/qwerty')
+})
+
 module.exports = router;

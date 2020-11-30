@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from '../../../styles.css';
 
 const Header = (props) => {
   const { setChart, myPlotData } = props;
 
   return (
-    <div className="headerContents">
-      <div className="logo" onClick={() => setChart(myPlotData)}>
+    <div className={styles.headerContents}>
+      <div className={styles.logo} onClick={() => setChart(myPlotData)}>
         hindsight
       </div>
     </div>

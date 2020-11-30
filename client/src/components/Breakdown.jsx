@@ -2,8 +2,10 @@ import React from 'react';
 import {
   PieChart, Pie, Sector, Cell,
 } from 'recharts';
+import styles from '../../../styles.css';
 
-const colors = ['#84cf96', '#84c9cf', '#8d84cf', '#cfc584'];
+// const colors = ['#84cf96', '#84c9cf', '#8d84cf', '#cfc584'];
+const colors = ['#46b355', '#46aeb3', '#acb346', '#b38b46', '#b35346', '#7246b3' ];
 
 const Breakdown = (props) => {
   const { portfolio, myPlotData } = props;
@@ -31,8 +33,8 @@ const Breakdown = (props) => {
   }
 
   return (
-    <div className="breakdown">
-      <div className="pieChart">
+    <div className={styles.breakdown}>
+      <div className={styles.pieChart}>
         <PieChart width={170} height={210}>
           <Pie
             data={data}
@@ -51,8 +53,8 @@ const Breakdown = (props) => {
         </PieChart>
       </div>
       <div>
-        <div className="diversity">Portfolio diversity</div>
-        <div className="divLabels">
+        <div className={styles.diversity}>Portfolio diversity</div>
+        <div className={styles.divLabels}>
           <div>name</div>
           <div>equity</div>
         </div>

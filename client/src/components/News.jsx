@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from './media/Image.jsx'
 const axios = require('axios');
 
 const News = (props) => {
@@ -22,16 +23,7 @@ const News = (props) => {
           media = <img className="postImage" src={post.data.url} />
         }
         return (
-          <div className="post">
-            <div style={{ textAlign: 'center', color: '#eb5b34' }}>
-              <div>{post.data.ups}</div>
-              <div>&#8593;</div>
-            </div>
-            <div className="postContent">
-              <div>{post.data.title}</div>
-              <div>{media}</div>
-            </div>
-          </div>
+          <Image post={post} />
         )
       })
       postList.shift();

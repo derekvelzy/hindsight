@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+const axios = require('axios');
 
 const Stock = (props) => {
   const { stock, setChart, addToPortfolio, type } = props;
@@ -17,23 +19,26 @@ const Stock = (props) => {
   }
 
   const height = type === 'watchlist' ? '100px' : '130px';
+  const url = `/stock/${stock.ticker}`
 
   return (
     <div className="stockContainer" style={{ height: vis ? height : '55px', transition: 'all .3s ease' }}>
       <div className="stock">
-        <div className="openStock">
-          <div style={{ width: '120px', marginLeft: '10px' }}>
-            <div>{stock.ticker}</div>
-            <div>{stock.shares === 0 ? '' : `${stock.shares} shares`}</div>
-          </div>
-          <div style={{ width: '110px' }}>
-            <div>${stock.data[99].cost}</div>
-            <div style={{ display: 'flex' }}>
-              <div>{percent > 0 ? <span className="pos">&#8599;</span> : <span className="neg">&#8600;</span>}</div>
-              <div style={{ marginLeft: '5px' }}>{percent}%</div>
+        <Link to={`/stock/${stock.ticker}`} style={{ textDecoration: 'none' }}>
+          <div className="openStock">
+            <div style={{ width: '120px', marginLeft: '10px' }}>
+              <div className="bb">{stock.ticker}</div>
+              <div style={{ fontSize: '13px', textDecoration: 'none' }}>{stock.shares === 0 ? '' : `${stock.shares} shares`}</div>
+            </div>
+            <div style={{ width: '110px' }}>
+              <div>${stock.data[99].cost}</div>
+              <div style={{ display: 'flex' }}>
+                <div>{percent > 0 ? <span className="pos">&#8599;</span> : <span className="neg">&#8600;</span>}</div>
+                <div style={{ marginLeft: '5px' }}>{percent}%</div>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
         <div className="tradeStock" onClick={() => {
             if (!vis) {
               setChart(stock)
