@@ -5,7 +5,7 @@ import {
 import styles from '../../../styles.css';
 
 // const colors = ['#84cf96', '#84c9cf', '#8d84cf', '#cfc584'];
-const colors = ['#46b355', '#46aeb3', '#acb346', '#b38b46', '#b35346', '#7246b3' ];
+const colors = ['#b1e77f', '#cddb72', '#87bd66', '#e3c65d', '#6cc495', '#69c7bf', '#b35346' ];
 
 const Breakdown = (props) => {
   const { portfolio, myPlotData } = props;
@@ -35,7 +35,7 @@ const Breakdown = (props) => {
   return (
     <div className={styles.breakdown}>
       <div className={styles.pieChart}>
-        <PieChart width={170} height={210}>
+        <PieChart width={170} height={170}>
           <Pie
             data={data}
             cx={85}

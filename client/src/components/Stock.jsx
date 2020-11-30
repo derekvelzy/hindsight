@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 const axios = require('axios');
+import styles from '../../../styles.css';
 
 const Stock = (props) => {
   const { stock, setChart, addToPortfolio, type } = props;
@@ -22,41 +23,41 @@ const Stock = (props) => {
   const url = `/stock/${stock.ticker}`
 
   return (
-    <div className="stockContainer" style={{ height: vis ? height : '55px', transition: 'all .3s ease' }}>
-      <div className="stock">
+    <div className={styles.stockContainer} style={{ height: vis ? height : '55px', transition: 'all .3s ease' }}>
+      <div className={styles.stock}>
         <Link to={`/stock/${stock.ticker}`} style={{ textDecoration: 'none' }}>
-          <div className="openStock">
+          <div className={styles.openStock}>
             <div style={{ width: '120px', marginLeft: '10px' }}>
-              <div className="bb">{stock.ticker}</div>
+              <div>{stock.ticker}</div>
               <div style={{ fontSize: '13px', textDecoration: 'none' }}>{stock.shares === 0 ? '' : `${stock.shares} shares`}</div>
             </div>
             <div style={{ width: '110px' }}>
               <div>${stock.data[99].cost}</div>
               <div style={{ display: 'flex' }}>
-                <div>{percent > 0 ? <span className="pos">&#8599;</span> : <span className="neg">&#8600;</span>}</div>
+                <div>{percent > 0 ? <span className={styles.pos}>&#8599;</span> : <span className={styles.neg}>&#8600;</span>}</div>
                 <div style={{ marginLeft: '5px' }}>{percent}%</div>
               </div>
             </div>
           </div>
         </Link>
-        <div className="tradeStock" onClick={() => {
+        <div className={styles.tradeStock} onClick={() => {
             if (!vis) {
               setChart(stock)
             }
           }}>
-          <button className="tradeButton" onClick={() => setVis(!vis)}>{vis ? 'cancel' : 'trade'}</button>
+          <button className={styles.tradeButton} onClick={() => setVis(!vis)}>{vis ? 'cancel' : 'trade'}</button>
         </div>
       </div>
       <div>
-        <div className="tradeContainer">
-          <form autoComplete="off" className="tradeForm">
+        <div className={styles.tradeContainer}>
+          <form autoComplete="off" className={styles.tradeForm}>
             <div style={{ marginBottom: '5px' }}>
-              <input className="tradeInput" autoComplete="off" id="buy" type="text" value={buyVal} onChange={(e) => handleChange(e, 'b')}></input>
-              <button className="buyButton" onClick={(e) => addToPortfolio(e, stock, buyVal)}>buy</button>
+              <input className={styles.tradeInput} autoComplete="off" id="buy" type="text" value={buyVal} onChange={(e) => handleChange(e, 'b')}></input>
+              <button className={styles.buyButton} onClick={(e) => addToPortfolio(e, stock, buyVal)}>buy</button>
             </div>
             <div style={{ display: type === 'watchlist' ? 'none' : 'block' }}>
-              <input className="tradeInput" autoComplete="off" id="sell" type="text" value={sellVal} onChange={(e) => handleChange(e, 's')}></input>
-              <button className="buyButton sellButton" onClick={(e) => addToPortfolio(e, stock, -1 * sellVal)}>sell</button>
+              <input className={styles.tradeInput} autoComplete="off" id="sell" type="text" value={sellVal} onChange={(e) => handleChange(e, 's')}></input>
+              <button className={`${styles.buyButton} ${styles.sellButton}`} onClick={(e) => addToPortfolio(e, stock, -1 * sellVal)}>sell</button>
             </div>
           </form>
         </div>

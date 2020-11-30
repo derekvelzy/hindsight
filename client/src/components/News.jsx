@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from './media/Image.jsx'
 const axios = require('axios');
+import styles from '../../../styles.css';
 
 const News = (props) => {
   const [latest, setLatest] = useState([])
@@ -42,11 +43,11 @@ const News = (props) => {
   }
 
   return (
-    <div className="news">
+    <div className={styles.news}>
       <div>
         <p>r/wallstreetbets</p>
       </div>
-      <div className="feed">
+      <div className={styles.feed}>
         {latest}
       </div>
     </div>

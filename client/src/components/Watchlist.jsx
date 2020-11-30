@@ -1,5 +1,6 @@
 import React from 'react';
 import Stock from './Stock.jsx'
+import styles from '../../../styles.css';
 
 const Watchlist = (props) => {
   const { watchlist, setChart, addToPortfolio, removeFromPortfolio } = props;
@@ -7,11 +8,11 @@ const Watchlist = (props) => {
   const list = watchlist.map(item => <Stock stock={item} setChart={setChart} addToPortfolio={addToPortfolio} type={'watchlist'} />)
 
   return (
-    <div className="watchlist list">
-      <div className="listTitle">
+    <div className={`${styles.watchlist} ${styles.list}`}>
+      <div className={styles.listTitle}>
         Watchlist
       </div>
-      <div className="listContents">
+      <div className={styles.listContents}>
         {list}
       </div>
     </div>

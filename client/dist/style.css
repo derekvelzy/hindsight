@@ -55,12 +55,12 @@ body {
   color: rgb(233, 233, 233);
 }
 
-/* .headerContents {
+.headerContents {
   display: flex;
   height: 55px;
   width: 100%;
   align-items: center;
-} */
+}
 
 /*
   Search

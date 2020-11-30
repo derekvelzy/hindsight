@@ -1,9 +1,11 @@
 body {
   font-family: 'Work Sans', sans-serif;
+  /* background: linear-gradient(to bottom right, #9fb346, #9bb346, #72b346, #4aa841, #367c2f); */
+  background: linear-gradient(to bottom right, #b1e77f, #81cc6e, #5ab361, #409968, #266e56);
 }
 
 .pos {
-  color: #84b346;
+  color: #81cc6e;
 }
 
 .neg {
@@ -23,11 +25,13 @@ body {
 .col1 {
   width: 72%;
   margin-right: 50px;
+  margin-top: 100px;
 }
 
 .col2 {
   width: 28%;
   height: 680px;
+  margin-top: 100px;
 }
 
 /*
@@ -38,16 +42,20 @@ body {
 .header {
   display: flex;
   margin: 0 auto;
-  margin-bottom: 20px;
   color: white;
-  /* background-color: rgb(133, 189, 156); */
-  background: linear-gradient(to right, #9bb346, #89b346, #65a841, #4f8333);
+  position: fixed;
   font-family: 'Sansita Swashed', cursive;
+  background: #81cc6e;
+  width: 100%;
+  height: 70px;
+  margin: -10px -10px 0px -10px;
+  box-shadow: rgba(6, 70, 38, 0.2) 0px 10px 20px;
+  z-index: 1;
 }
 
 .logo {
-  font-size: 32px;
-  margin-left: 30px;
+  font-size: 40px;
+  margin-left: 40px;
   cursor: pointer;
 }
 
@@ -55,12 +63,13 @@ body {
   color: rgb(233, 233, 233);
 }
 
-/* .headerContents {
+.headerContents {
   display: flex;
-  height: 55px;
+  /* height: 55px; */
   width: 100%;
   align-items: center;
-} */
+  position: sticky;
+}
 
 /*
   Search
@@ -68,21 +77,27 @@ body {
 */
 
 .searchPosition {
-  margin-top: -60px;
-  margin-bottom: 30px;
+  /* margin-top: -80px; */
+  margin-bottom: 0px;
 }
 
 .searchContainer {
-  margin: 0;
+  position: fixed;
+  margin: -90px 0px 0px 0px;
   height: 30px;
+  width: 316px;
+  z-index: 2;
 }
 
 .searchbar {
-  border: 2px solid rgb(194, 194, 194);
+  border: none;
   width: 100%;
   height: 30px;
-  border-radius: 5px;
+  padding-left: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   margin-bottom: 0px;
+
 }
 
 .searchbar:focus {
@@ -91,15 +106,13 @@ body {
 
 .searchResults {
   position: absolute;
-  width: 314px;
+  width: 316px;
   display: flex;
   flex-direction: column;
   margin-top: -16px;
-  border: 2px solid rgb(194, 194, 194);
+  border: none;
   border-top: none;
-  background: rgb(240, 240, 240);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 18px 20px;
 }
 
 .searchItem {
@@ -113,6 +126,8 @@ body {
 
 .searchItem:nth-last-child(1) {
   border-bottom: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .searchItem:hover {
@@ -128,8 +143,8 @@ body {
 
 .news {
   margin: 40px 0px;
-  border: 1px solid rgb(233, 233, 233);
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 16px;
+  background: white;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 16px;
 }
 
 .feed {
@@ -162,10 +177,18 @@ body {
 */
 
 .list {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(233, 233, 233);
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 16px;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 16px;
+  background: white;
+  border-radius: 12px;
+  overflow: scroll;
+  max-height: 290px;
+}
+
+.watchlist {
+  top: 420px;
 }
 
 .listTitle {
@@ -203,6 +226,10 @@ body {
   border-bottom: 1px solid rgb(233, 233, 233);
   padding: 0px 6px;
   overflow: hidden;
+}
+
+.stockContainer:nth-last-child(1) {
+  border-bottom: none;
 }
 
 .tradeContainer {
@@ -257,21 +284,30 @@ body {
 }
 
 .buyButton {
-  background: rgb(133, 189, 156);
+  background: linear-gradient(to bottom right, #5ab361, #45a06e);
   border: none;
   padding: 5px;
   width: 50px;
   margin-left: 5px;
   color: white;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .sellButton {
-  background: rgb(196, 87, 111);
+  background:linear-gradient(to bottom right, rgb(196, 87, 111), rgb(172, 74, 95))
 }
 
 .buyButton:focus {
   outline: none;
+}
+
+.buyButton:active {
+  background: #64c26b;
+}
+
+.sellButton:active {
+  background: rgb(214, 107, 130);
 }
 
 .tradeButton {
@@ -307,18 +343,27 @@ body {
 .timeline {
   display: flex;
   justify-content: space-between;
+  margin-top: 40px;
+  background: white;
+  border-radius: 12px;
+  padding: 0px 0px 0px 16px;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 20px;
 }
 
 .timelineBut {
-  border: 1px solid rgb(194, 194, 194);
+  font-size: 16px;
+  border: none;
   background: white;
-  padding: 5px 24px;
+  padding: 20px 24px;
   cursor: pointer;
+  border-radius: 12px;
+  vertical-align: center;
 }
 
 .timelineBut:hover {
   transition: all .3s ease;
-  background: rgb(235, 235, 235);
+  color: #5ab361;
+  background: rgb(245, 245, 245);
 }
 
 .timelineBut:focus {
@@ -332,8 +377,14 @@ body {
 
 .graph {
   margin-bottom: 40px;
+  /* padding: 20px; */
+
 }
 
+.chart {
+  background: white;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 16px;
+}
 
 /*
   Breakdown
@@ -360,4 +411,7 @@ body {
 
 .breakdown {
   display: flex;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
 }
