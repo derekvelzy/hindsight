@@ -105,8 +105,13 @@ const Home: React.FC = () => {
       })
   };
 
-  const addToPortfolio = (e, stock, value) => {
+  const addToPortfolio = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    stock,
+    value
+  ) => {
     e.preventDefault();
+    console.log('stocker', stock)
 
     for (let i = 0; i < portfolio.length; i++) {
       if (portfolio[i].ticker === stock.ticker) {
@@ -115,7 +120,7 @@ const Home: React.FC = () => {
         if (total < 0) {
           total = 0;
         }
-        updateShares(stock.ticker, total)
+        updateShares(stock.ticker, total);
       }
     }
     for (let i = 0; i < watchlist.length; i++) {
@@ -145,7 +150,6 @@ const Home: React.FC = () => {
   };
 
   const setChart = (stock) => {
-    console.log('ssstok', stock)
     const dataPoints = stock.data.map((point) => {
       return {
         name: point["date"].substring(5),

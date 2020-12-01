@@ -13,29 +13,62 @@ const colors = [
   "#b35346",
 ];
 
-const Breakdown: React.FC = (props) => {
-  const { portfolio, myPlotData } = props;
+type Props = {
+  portfolio: {
+    name: string;
+    ticker: string;
+    shares: number;
+    data: { date: string; cost: number }[];
+  }[];
+  myPlotData: {
+    ticker: string;
+    name: string;
+    data: { date: string; cost: number }[];
+  };
+};
+
+const Breakdown: React.FC<Props> = ({ portfolio, myPlotData }) => {
   let labels;
-  const data = portfolio.map(stock => {
-    return {name: stock.name, value: (stock.shares * stock.data[99].cost)}
+  const data = portfolio.map((stock) => {
+    return { name: stock.name, value: stock.shares * stock.data[99].cost };
   });
   if (myPlotData.data) {
-    console.log(myPlotData.data[99])
     let i = -1;
-    labels = portfolio.map(stock => {
-      const percent = (100 * ((stock.data[99].cost * stock.shares) / myPlotData.data[99].cost)).toString();
-      const perString = percent.substring(0, percent.indexOf('.') + 3);
+    labels = portfolio.map((stock) => {
+      const percent = (
+        100 *
+        ((stock.data[99].cost * stock.shares) / myPlotData.data[99].cost)
+      ).toString();
+      const perString = percent.substring(0, percent.indexOf(".") + 3);
       i += 1;
       return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <div style={{ background: colors[i], height: '10px', width: '10px', marginRight: '10px' }}>{' '}</div>
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "5px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "baseline" }}>
+            <div
+              style={{
+                background: colors[i],
+                height: "10px",
+                width: "10px",
+                marginRight: "10px",
+              }}
+            >
+              {" "}
+            </div>
             <div>{stock.name}</div>
           </div>
-          <div>${stock.data[99].cost * stock.shares} / {perString}%</div>
+          <div>
+            ${stock.data[99].cost * stock.shares} / {perString}%
+          </div>
         </div>
-      )
-    })
+      );
+    });
   }
 
   return (
@@ -53,7 +86,7 @@ const Breakdown: React.FC = (props) => {
             dataKey="value"
           >
             {
-              data.map((entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)
+              data.map((_entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)
             }
           </Pie>
         </PieChart>
@@ -67,7 +100,7 @@ const Breakdown: React.FC = (props) => {
         <div>{labels}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Breakdown;

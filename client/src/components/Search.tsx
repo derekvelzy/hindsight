@@ -2,25 +2,35 @@ import React, { useState } from "react";
 import tickers from "../tickers/tickers";
 import styles from '../../../styles.css';
 
-const Search: React.FC = (props) => {
-  const { getStock, search, setSearch } = props;
+type Props = {
+  search: string;
+  getStock: ([string]) => void;
+  setSearch: (string) => void;
+};
+
+const Search: React.FC<Props> = ({ search, getStock, setSearch }) => {
   // const [search, setSearch] = useState('')
   const [filter, setFilter] = useState([]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSearch(e.target.value);
     filterSearch(e.target.value)
-  }
+  };
 
   const filterSearch = (search) => {
-    if (search === '') {
+    if (search === "") {
       setFilter([]);
     } else {
-      const list = tickers.filter(stock => {
-        if (search.toLowerCase() === stock[0].substring(0, search.length).toLowerCase() || search.toLowerCase() === stock[1].substring(0, search.length).toLowerCase()) {
+      const list = tickers.filter((stock) => {
+        if (
+          search.toLowerCase() ===
+            stock[0].substring(0, search.length).toLowerCase() ||
+          search.toLowerCase() ===
+            stock[1].substring(0, search.length).toLowerCase()
+        ) {
           return stock;
         }
-      })
+      });
       const mapped = list.map(stock => {
         return (
           <div className={styles.searchItem} onClick={() => getStock(stock)}>
