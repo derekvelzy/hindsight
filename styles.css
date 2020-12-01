@@ -1,7 +1,6 @@
 body {
   font-family: 'Work Sans', sans-serif;
-  /* background: linear-gradient(to bottom right, #9fb346, #9bb346, #72b346, #4aa841, #367c2f); */
-  background: linear-gradient(to bottom right, #b1e77f, #81cc6e, #5ab361, #409968, #266e56);
+  background: linear-gradient(to bottom right, #bcdb75, #7bd161, #4dbd53,  #3aaa5f, #2a947a, #237971);
 }
 
 .pos {
@@ -25,13 +24,13 @@ body {
 .col1 {
   width: 72%;
   margin-right: 50px;
-  margin-top: 100px;
+  margin-top: 90px;
 }
 
 .col2 {
   width: 28%;
   height: 680px;
-  margin-top: 100px;
+  margin-top: 90px;
 }
 
 /*
@@ -45,11 +44,12 @@ body {
   color: white;
   position: fixed;
   font-family: 'Sansita Swashed', cursive;
-  background: #81cc6e;
+  /* background: #4dbd53; */
+  background: linear-gradient(to right, #bcdb75, #7bd161, #4fc255,  #41b467);
   width: 100%;
   height: 70px;
   margin: -10px -10px 0px -10px;
-  box-shadow: rgba(6, 70, 38, 0.2) 0px 10px 20px;
+  /* box-shadow: rgba(6, 70, 38, 0.2) 0px 10px 20px; */
   z-index: 1;
 }
 
@@ -83,19 +83,20 @@ body {
 
 .searchContainer {
   position: fixed;
-  margin: -90px 0px 0px 0px;
-  height: 30px;
+  margin: -82px 0px 0px 0px;
+  height: 36px;
   width: 316px;
   z-index: 2;
+  font-size: 16px;
 }
 
 .searchbar {
   border: none;
   width: 100%;
-  height: 30px;
+  height: 36px;
   padding-left: 15px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
   margin-bottom: 0px;
 
 }
@@ -148,8 +149,7 @@ body {
 }
 
 .feed {
-  max-height: 700px;
-  overflow: scroll;
+
 }
 
 .post {
@@ -182,13 +182,13 @@ body {
   flex-direction: column;
   box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 16px;
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   overflow: scroll;
-  max-height: 290px;
+  max-height: 295px;
 }
 
 .watchlist {
-  top: 420px;
+  top: 415px;
 }
 
 .listTitle {
@@ -291,7 +291,7 @@ body {
   margin-left: 5px;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .sellButton {
@@ -343,9 +343,9 @@ body {
 .timeline {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 20px;
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 0px 0px 0px 16px;
   box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 20px;
 }
@@ -356,7 +356,7 @@ body {
   background: white;
   padding: 20px 24px;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 6px;
   vertical-align: center;
 }
 
@@ -391,6 +391,14 @@ body {
   ==============================================
 */
 
+.breakdown {
+  display: flex;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: rgba(6, 70, 38, 0.35) 0px 0px 20px;
+}
+
 .pieChart {
   margin-right: 60px;
 }
@@ -407,11 +415,4 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-}
-
-.breakdown {
-  display: flex;
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
 }

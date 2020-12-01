@@ -1,13 +1,19 @@
-import React from 'react';
-import {
-  PieChart, Pie, Sector, Cell,
-} from 'recharts';
-import styles from '../../../styles.css';
+import React from "react";
+import { PieChart, Pie, Cell } from "recharts";
+import styles from "../../../styles.css";
 
 // const colors = ['#84cf96', '#84c9cf', '#8d84cf', '#cfc584'];
-const colors = ['#b1e77f', '#cddb72', '#87bd66', '#e3c65d', '#6cc495', '#69c7bf', '#b35346' ];
+const colors = [
+  "#bcdb75",
+  "#2a947a",
+  "rgb(123, 199, 73)",
+  "#23c3cf",
+  "#6cc495",
+  "#69c7bf",
+  "#b35346",
+];
 
-const Breakdown = (props) => {
+const Breakdown: React.FC = (props) => {
   const { portfolio, myPlotData } = props;
   let labels;
   const data = portfolio.map(stock => {

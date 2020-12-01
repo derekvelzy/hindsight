@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styles from '../../../../styles.css';
+import React, { useState } from "react";
+import styles from "../../../../styles.css";
 
-const Image = (props) => {
+const Image: React.FC = (props) => {
   const { post } = props;
   const [view, setView] = useState(false)
 

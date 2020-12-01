@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Image from './media/Image.jsx'
-const axios = require('axios');
-import styles from '../../../styles.css';
+import React, { useState, useEffect } from "react";
+import Image from "./media/Image";
+import axios from "axios";
+import styles from "../../../styles.css";
 
-const News = (props) => {
+const News: React.FC = (props) => {
   const [latest, setLatest] = useState([])
 
   useEffect(() => {

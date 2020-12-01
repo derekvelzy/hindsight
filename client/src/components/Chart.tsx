@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
-} from 'recharts';
-import styles from '../../../styles.css';
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import styles from "../../../styles.css";
 
-const Chart = (props) => {
-  const { plotData, chartView } = props;
+type Props = {
+  plotData: [];
+  chartView: {
+    ticker: string;
+    name: string;
+  };
+};
+
+const Chart: React.FC<Props> = ({ plotData, chartView }) => {
   const [time, setTime] = useState(99);
 
   if (plotData.length > 0) {

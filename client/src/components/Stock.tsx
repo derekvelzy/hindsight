@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-const axios = require('axios');
-import styles from '../../../styles.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "../../../styles.css";
 
-const Stock = (props) => {
+const Stock: React.FC = (props) => {
   const { stock, setChart, addToPortfolio, type } = props;
 
   const [vis, setVis] = useState(false);

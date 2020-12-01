@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Chart from './Chart.jsx';
+import React, { useState, useEffect } from "react";
 
-const StockPage = () => {
+const StockPage: React.FC = () => {
   const [plotData, setPlotData] = useState([]);
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const StockPage = () => {
   return (
     <div>
       <p>Stonk</p>
-      <Chart />
     </div>
   )
 }

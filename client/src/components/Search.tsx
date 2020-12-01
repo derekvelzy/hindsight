@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import tickers from '../tickers/tickers.js'
+import React, { useState } from "react";
+import tickers from "../tickers/tickers";
 import styles from '../../../styles.css';
 
-const Search = (props) => {
+const Search: React.FC = (props) => {
   const { getStock, search, setSearch } = props;
   // const [search, setSearch] = useState('')
   const [filter, setFilter] = useState([]);
@@ -25,8 +25,8 @@ const Search = (props) => {
         return (
           <div className={styles.searchItem} onClick={() => getStock(stock)}>
             <div key={stock[0]}>
-              <div>{stock[0]}</div>
-              <div>{stock[1]}</div>
+              <div style={{ fontSize: '16px' }}>{stock[0]}</div>
+              <div style={{ fontSize: '13px' }}>{stock[1]}</div>
             </div>
             <div>
               +
@@ -51,7 +51,7 @@ const Search = (props) => {
   return (
     <div className={styles.searchContainer}>
       <form autoComplete="off">
-        <input style={{ borderBottomLeftRadius: search === '' ?  '15px' : '0px', borderBottomRightRadius: search === '' ?  '15px' : '0px'}} className={styles.searchbar} autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
+        <input style={{ borderBottomLeftRadius: search === '' ?  '18px' : '0px', borderBottomRightRadius: search === '' ?  '18px' : '0px'}} className={styles.searchbar} autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
       </form>
       <div className={styles.searchResults} style={{ display: search === '' ? 'none' : 'block'}}>
         {filter}

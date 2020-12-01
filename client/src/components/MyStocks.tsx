@@ -1,9 +1,9 @@
-import React from 'react';
-import Stock from './Stock.jsx';
-import Search from './Search.jsx';
-import styles from '../../../styles.css';
+import React from "react";
+import Stock from "./Stock";
+import Search from "./Search";
+import styles from "../../../styles.css";
 
-const MyStocks = (props) => {
+const MyStocks: React.FC = (props) => {
   const { portfolio, setChart, addToPortfolio, removeFromPortfolio, myPlotData, getStock, search, setSearch, } = props;
 
   const list = portfolio.map(item => <Stock stock={item} setChart={setChart} addToPortfolio={addToPortfolio} type={'portfolio'} />)
