@@ -22,6 +22,7 @@ module.exports = {
   },
 
   post: function(req, res) {
+    console.log(req.body, new Date().toLocaleDateString(), req.body.date === new Date().toLocaleDateString())
     model.createDate(req.body, (err) => {
       if (err) {
         res.sendStatus(400);

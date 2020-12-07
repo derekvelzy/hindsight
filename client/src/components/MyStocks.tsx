@@ -46,30 +46,30 @@ const MyStocks: React.FC<Props> = ({
   getStock,
   setSearch,
 }) => {
-  const list = portfolio.map((item) => (
-    <Stock
-      key={item.ticker}
-      stock={item}
-      setChart={setChart}
-      addToPortfolio={addToPortfolio}
-      type={"portfolio"}
-    />
-  ));
+  let i = 0;
+  const list = portfolio.map((item) => {
+    i += 1;
+    return (
+      <Stock
+        key={item.ticker}
+        colorID={i}
+        stock={item}
+        setChart={setChart}
+        addToPortfolio={addToPortfolio}
+        removeFromPortfolio={removeFromPortfolio}
+        type={"portfolio"}
+      />
+    )
+  });
 
   return (
     <div>
       <div className={styles.searchPosition}>
         <Search getStock={getStock} search={search} setSearch={setSearch} />
       </div>
-      <div className={`${styles.portfolio} ${styles.list}`}>
-        <div className={`${styles.listTitle} ${styles.stockListTitle}`}>
-          <div>My Stocks</div>
-          <button
-            className={styles.vmpButton}
-            onClick={() => setChart(myPlotData)}
-          >
-            View my Portfolio
-          </button>
+      <div className={`${styles.portfolio}`}>
+        <div>
+          <div className={styles.myStocksTitle}>My Stocks</div>
         </div>
         <div className={styles.listContents}>{list}</div>
       </div>

@@ -11,6 +11,7 @@ type Props = {
 const Search: React.FC<Props> = ({ search, getStock, setSearch }) => {
   // const [search, setSearch] = useState('')
   const [filter, setFilter] = useState([]);
+  const [shadow, setShadow] = useState(false);
 
   const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSearch(e.target.value);
@@ -31,19 +32,21 @@ const Search: React.FC<Props> = ({ search, getStock, setSearch }) => {
           return stock;
         }
       });
-      const mapped = list.map(stock => {
+      const mapped = list.map((stock) => {
         return (
-          <div className={styles.searchItem} onClick={() => getStock(stock)}>
-            <div key={stock[0]}>
-              <div style={{ fontSize: '16px' }}>{stock[0]}</div>
-              <div style={{ fontSize: '13px' }}>{stock[1]}</div>
-            </div>
+          <div
+            key={stock[0]}
+            className={styles.searchItem}
+            onClick={() => getStock(stock)}
+          >
             <div>
-              +
+              <div style={{ fontSize: "16px" }}>{stock[0]}</div>
+              <div style={{ fontSize: "13px" }}>{stock[1]}</div>
             </div>
+            <div>+</div>
           </div>
-        )
-      })
+        );
+      });
       if (mapped.length === 0) {
         setFilter(
           <div className={styles.searchItem} onClick={() => getStock(stock)}>
@@ -61,13 +64,29 @@ const Search: React.FC<Props> = ({ search, getStock, setSearch }) => {
   return (
     <div className={styles.searchContainer}>
       <form autoComplete="off">
-        <input style={{ borderBottomLeftRadius: search === '' ?  '18px' : '0px', borderBottomRightRadius: search === '' ?  '18px' : '0px'}} className={styles.searchbar} autoComplete="off" id="search" type="text" placeholder="search..." onChange={handleChange} value={search}></input>
+        <input
+          style={{
+            borderBottomLeftRadius: search === "" ? "18px" : "0px",
+            borderBottomRightRadius: search === "" ? "18px" : "0px",
+            fontFamily: 'Work Sans, sans-serif'
+          }}
+          className={styles.searchbar}
+          autoComplete="off"
+          id="search"
+          type="text"
+          placeholder="search..."
+          onChange={handleChange}
+          value={search}
+        ></input>
       </form>
-      <div className={styles.searchResults} style={{ display: search === '' ? 'none' : 'block'}}>
+      <div
+        className={styles.searchResults}
+        style={{ display: search === "" ? "none" : "block" }}
+      >
         {filter}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Search;

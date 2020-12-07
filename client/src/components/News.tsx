@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "./media/Image";
+import Video from "./media/Video";
 import axios from "axios";
 import styles from "../../../styles.css";
 
@@ -19,9 +20,11 @@ const News: React.FC = () => {
       const postList = posts.map((post) => {
         let media;
         if (!post.data.media && post.data.preview && post.data.url) {
-          media = <img className="postImage" src={post.data.url} />;
+          return <Image key={post.data.id} post={post} />;
+        } else if (post.data.media) {
+          return <Video key={post.data.id} post={post} />;
         }
-        return <Image key={post.data.id} post={post} />;
+        return <div>asdfghjkl</div>
       });
       postList.shift();
       setLatest(postList);
@@ -39,8 +42,12 @@ const News: React.FC = () => {
 
   return (
     <div className={styles.news}>
-      <div>
-        <p>r/wallstreetbets</p>
+      <div style={{ fontSize: '24px', fontWeight: '600' }}>Market News</div>
+      <div className={styles.newsOptions}>
+        <button className={`${styles.newsButton} ${styles.twitterBut}`}>Twitter</button>
+        <button className={`${styles.newsButton} ${styles.yahooBut}`}>Yahoo Finance</button>
+        <button className={`${styles.newsButton} ${styles.redditBut}`}>Reddit: r/stocks</button>
+        <button className={`${styles.newsButton} ${styles.wsbBut}`}>Reddit: r/wallstreetbets</button>
       </div>
       <div className={styles.feed}>{latest}</div>
     </div>

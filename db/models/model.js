@@ -28,6 +28,17 @@ module.exports = {
     })
   },
 
+  getOne: function(ticker, callback) {
+    console.log(ticker);
+    StockModel.find({ticker: ticker}, (err, results) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, results);
+      }
+    })
+  },
+
   removeOne: function(stock, callback) {
     StockModel.deleteOne({ticker: stock.ticker}, (err) => {
       if (err) {

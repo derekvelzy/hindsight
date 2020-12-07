@@ -23,7 +23,7 @@ module.exports = {
   },
 
   createDate: function(date, callback) {
-    console.log("the day:", date);
+    console.log("the day:", date.date);
     var createDate = new DateModel({
       date: date.date
     })

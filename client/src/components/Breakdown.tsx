@@ -4,13 +4,14 @@ import styles from "../../../styles.css";
 
 // const colors = ['#84cf96', '#84c9cf', '#8d84cf', '#cfc584'];
 const colors = [
-  "#bcdb75",
-  "#2a947a",
-  "rgb(123, 199, 73)",
-  "#23c3cf",
-  "#6cc495",
-  "#69c7bf",
-  "#b35346",
+  "rgb(233, 112, 118)",
+  "rgb(241, 231, 88)",
+  "rgb(112, 233, 173)",
+  "rgb(255, 110, 84)",
+  "rgb(114, 112, 233)",
+  "rgb(233, 181, 112)",
+  "rgb(233, 225, 112)",
+  "rgb(88, 241, 170)",
 ];
 
 type Props = {
@@ -32,7 +33,7 @@ const Breakdown: React.FC<Props> = ({ portfolio, myPlotData }) => {
   const data = portfolio.map((stock) => {
     return { name: stock.name, value: stock.shares * stock.data[99].cost };
   });
-  if (myPlotData.data) {
+  if (myPlotData.data.length > 0) {
     let i = -1;
     labels = portfolio.map((stock) => {
       const percent = (
@@ -85,9 +86,12 @@ const Breakdown: React.FC<Props> = ({ portfolio, myPlotData }) => {
             paddingAngle={5}
             dataKey="value"
           >
-            {
-              data.map((_entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)
-            }
+            {data.map((_entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={colors[index % colors.length]}
+              />
+            ))}
           </Pie>
         </PieChart>
       </div>

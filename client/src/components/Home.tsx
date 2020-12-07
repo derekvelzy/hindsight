@@ -8,9 +8,26 @@ import Watchlist from "./Watchlist";
 import MyChart from "../myChart";
 import axios from "axios";
 import styles from "../../../styles.css";
+import dark from "../../../dark.css";
 
-const Home: React.FC = () => {
-  const [myPlotData, setMyPlotData] = useState({}); // holds plot data to my specific portfolio
+interface StockShape {
+  name: string;
+  ticker: string;
+  shares: number;
+  data: { date: string; cost: number }[];
+}
+
+type Props = {
+  mode: boolean;
+  setMode: (arg: boolean) => void;
+};
+
+const Home: React.FC<Props> = ({ mode, setMode }) => {
+  const [myPlotData, setMyPlotData] = useState({
+    ticker: "My Portfolio",
+    name: "",
+    data: [],
+  }); // holds plot data to my specific portfolio
   const [plotData, setPlotData] = useState([]); // this is the data passed into the setChart function
   const [portfolio, setPortfolio] = useState([]); // holds objects of each stock I own
   const [watchlist, setWatchlist] = useState([]); // holds objects of each stock in my watchlist
@@ -74,23 +91,25 @@ const Home: React.FC = () => {
     axios({
       method: "get",
       url: apiCall,
-    })
-      .then((data) => {
-        for (let key in data['data']['Time Series (Daily)']) {
-          coords.unshift({date: key, cost: data['data']['Time Series (Daily)'][key]['4. close']})
-        }
-        var object = {
-          ticker: stock[0],
-          name: stock[1],
-          shares: 0,
-          data: coords
-        }
-        var currentPort = portfolio;
-        currentPort.push(object);
-        // Call addToPortfolio to send the stock to your database
-        addToWatchlist(object);
-      })
-  }
+    }).then((data) => {
+      for (const key in data["data"]["Time Series (Daily)"]) {
+        coords.unshift({
+          date: key,
+          cost: data["data"]["Time Series (Daily)"][key]["4. close"],
+        });
+      }
+      const object = {
+        ticker: stock[0],
+        name: stock[1],
+        shares: 0,
+        data: coords,
+      };
+      const currentPort = portfolio;
+      currentPort.push(object);
+      // Call addToPortfolio to send the stock to your database
+      addToWatchlist(object);
+    });
+  };
 
   const addToWatchlist = (stock) => {
     // Adds the stock data from the API request to my database
@@ -98,20 +117,18 @@ const Home: React.FC = () => {
       method: "post",
       url: "http://localhost:8020/requests",
       data: stock,
-    })
-      .then(() => {
-        // Call get all to get all new stock data and update your portfolio hook
-        getAll();
-      })
+    }).then(() => {
+      // Call get all to get all new stock data and update your portfolio hook
+      getAll();
+    });
   };
 
   const addToPortfolio = (
     e: React.MouseEvent<HTMLButtonElement>,
-    stock,
-    value
+    stock: StockShape,
+    value: string
   ) => {
     e.preventDefault();
-    console.log('stocker', stock)
 
     for (let i = 0; i < portfolio.length; i++) {
       if (portfolio[i].ticker === stock.ticker) {
@@ -131,7 +148,7 @@ const Home: React.FC = () => {
     }
   };
 
-  const updateShares = (ticker, total) => {
+  const updateShares = (ticker: string, total: number) => {
     axios({
       method: "patch",
       url: "http://localhost:8020/requests",
@@ -139,17 +156,25 @@ const Home: React.FC = () => {
         ticker: ticker,
         amount: total,
       },
-    })
-      .then(() => {
-        getAll()
-      })
-  }
-
-  const removeFromPortfolio = () => {
-    // removes a stock from the portfolio
+    }).then(() => {
+      getAll();
+    });
   };
 
-  const setChart = (stock) => {
+  const removeFromPortfolio = (ticker: string) => {
+    // removes a stock from the portfolio
+    axios({
+      method: "put",
+      url: "http://localhost:8020/requests",
+      data: {
+        ticker: ticker,
+      },
+    }).then(() => {
+      getAll();
+    });
+  };
+
+  const setChart = (stock: StockShape) => {
     const dataPoints = stock.data.map((point) => {
       return {
         name: point["date"].substring(5),
@@ -163,23 +188,42 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.cont}>
       <div className={styles.header}>
-        <Header setChart={setChart} myPlotData={myPlotData} />
+        <Header
+          setChart={setChart}
+          myPlotData={myPlotData}
+          mode={mode}
+          setMode={setMode}
+        />
       </div>
-      <div className={`${styles.columns} ${styles.container}`}>
+      <div className={`${styles.columns} ${styles.colContainer}`}>
         <div className={styles.col1}>
+          <MyStocks
+            portfolio={portfolio}
+            setChart={setChart}
+            addToPortfolio={addToPortfolio}
+            removeFromPortfolio={removeFromPortfolio}
+            myPlotData={myPlotData}
+            getStock={getStock}
+            search={search}
+            setSearch={setSearch}
+          />
+          <Watchlist
+            watchlist={watchlist}
+            setChart={setChart}
+            addToPortfolio={addToPortfolio}
+            removeFromPortfolio={removeFromPortfolio}
+          />
+        </div>
+        <div className={styles.col2}>
           <Chart plotData={plotData} chartView={chartView} />
           <Breakdown portfolio={portfolio} myPlotData={myPlotData} />
           <News />
         </div>
-        <div className={styles.col2}>
-          <MyStocks portfolio={portfolio} setChart={setChart} addToPortfolio={addToPortfolio} removeFromPortfolio={removeFromPortfolio} myPlotData={myPlotData} getStock={getStock} search={search} setSearch={setSearch} />
-          <Watchlist watchlist={watchlist} setChart={setChart} addToPortfolio={addToPortfolio} removeFromPortfolio={removeFromPortfolio} />
-        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;
