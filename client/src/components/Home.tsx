@@ -8,13 +8,12 @@ import Watchlist from "./Watchlist";
 import MyChart from "../myChart";
 import axios from "axios";
 import styles from "../../../styles.css";
-import dark from "../../../dark.css";
 
 interface StockShape {
   name: string;
   ticker: string;
   shares: number;
-  data: { date: string; cost: number }[];
+  data: { date: string; cost: number; volume: number }[];
 }
 
 type Props = {
@@ -47,6 +46,7 @@ const Home: React.FC<Props> = ({ mode, setMode }) => {
       url: "http://localhost:8020/requests",
     })
       .then((response) => {
+        console.log(response);
         const allStocks = response.data;
         const myStocks = [];
         const myWatchlist = [];
@@ -92,10 +92,12 @@ const Home: React.FC<Props> = ({ mode, setMode }) => {
       method: "get",
       url: apiCall,
     }).then((data) => {
+      console.log(data);
       for (const key in data["data"]["Time Series (Daily)"]) {
         coords.unshift({
           date: key,
           cost: data["data"]["Time Series (Daily)"][key]["4. close"],
+          volume: data["data"]["Time Series (Daily)"][key]["6. volume"],
         });
       }
       const object = {

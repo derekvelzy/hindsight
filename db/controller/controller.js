@@ -1,5 +1,8 @@
 const model = require('../models/model.js');
 const dateModel = require('../models/dateModel.js');
+const axios = require('axios');
+const apiKey = "721H17JOIS0DYUYS";
+
 
 module.exports = {
   post: function(req, res) {
@@ -14,28 +17,57 @@ module.exports = {
   },
 
   get: function(req, res) {
-
     var theDate = new Date().toLocaleDateString();
     dateModel.getDate((err, date) => {
+      console.log('date!!!!!!', date)
       if (err) {
-        console.log('error')
+        res.sendStatus(400);
       } else if (date[0].date === theDate) {
         console.log('not neww', date, theDate);
         model.getAll((err, results) => {
           if (err) {
-            console.log('error getting')
+            res.sendStatus(400);
           } else {
             res.send(results);
           }
         })
       } else {
-        console.log('neww', date, theDate);
-        console.log('get all tickers')
-        model.getAll((err, results) => {
+        dateModel.updateDate(theDate, (err) => {
           if (err) {
-            console.log('error getting')
+            throw err;
           } else {
-            res.send(results);
+            model.getAll(async (err, results) => {
+              if (err) {
+                res.sendStatus(400);
+              } else {
+                for (const result of results) {
+                  await axios({
+                    method: "get",
+                    url: `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${result.ticker}&outputsize=compact&apikey=${apiKey}`,
+                  }).then((data) => {
+                    const coords = [];
+                    for (const key in data["data"]["Time Series (Daily)"]) {
+                      coords.unshift({
+                        date: key,
+                        cost: data["data"]["Time Series (Daily)"][key]["4. close"],
+                      });
+                    }
+                    return { ticker: result.ticker, data: coords };
+                  }).then((newData) => {
+                    model.updateStockData(newData)
+                    // console.log('new data', newData)
+                  });
+                }
+                console.log('lastly...');
+                model.getAll((err, results) => {
+                  if (err) {
+                    res.sendStatus(400);
+                  } else {
+                    res.send(results);
+                  }
+                })
+              }
+            })
           }
         })
       }

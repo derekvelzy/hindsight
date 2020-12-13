@@ -29,9 +29,9 @@ const Header: React.FC<Props> = ({ setChart, myPlotData, mode, setMode }) => {
         >
           View my Portfolio
         </button>
-        <button className={styles.modeBut} onClick={() => setMode(!mode)}>
+        {/* <button className={styles.modeBut} onClick={() => setMode(!mode)}>
           Mode
-        </button>
+        </button> */}
       </div>
     </div>
   );

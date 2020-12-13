@@ -2,17 +2,16 @@ const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
-const router = require('./routes.js');
 
 // eslint-disable-next-line no-unused-vars
 const db = require('../db/mongoDB.js');
+const router = require('./routes.js');
 
 const app = express();
 app.use(morgan('dev'));
+app.use(parser.json());
 
 app.set('port', 8020);
-
-app.use(parser.json());
 
 app.use('/', express.static(path.join(__dirname, '/../client/dist')), router);
 

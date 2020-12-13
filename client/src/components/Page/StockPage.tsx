@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageChart from "./PageChart";
+import PageNews from "./PageNews";
+import PageStock from "./PageStock";
 import axios from "axios";
 import styles from "../../../../styles.css";
 import { Link } from "react-router-dom";
@@ -49,9 +51,14 @@ const StockPage: React.FC = () => {
           hindsight
         </Link>
       </div>
-      <div className={styles.container}>
-        <p>Stonk</p>
-        <PageChart stockData={stockData} />
+      <div className={`${styles.columns} ${styles.colContainer}`}>
+        <div className={styles.col3}>
+          <PageStock stockData={stockData} />
+        </div>
+        <div className={styles.col4}>
+          <PageChart stockData={stockData} />
+          <PageNews />
+        </div>
       </div>
     </div>
   );

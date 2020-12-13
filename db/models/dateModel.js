@@ -11,9 +11,9 @@ module.exports = {
     })
   },
 
-  updateDate: function(date, callback) {
-    console.log(date.date, 'in the model');
-    DateModel.findOneAndUpdate({}, {date: date.date}, (err) => {
+  updateDate: function(theDate, callback) {
+    console.log(theDate, 'in the model');
+    DateModel.findOneAndUpdate({}, {date: theDate}, (err) => {
       if (err) {
         callback(err);
       } else {

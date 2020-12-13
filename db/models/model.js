@@ -1,4 +1,4 @@
-var StockModel = require('../schema/mongoSchema.js')
+const StockModel = require('../schema/mongoSchema.js')
 
 module.exports = {
   addStock: function(stock, callback) {
@@ -62,9 +62,9 @@ module.exports = {
   updateStockData: function(data) {
     StockModel.findOneAndUpdate({ticker: data.ticker}, {data: data.data}, (err) => {
       if (err) {
-        console.log('error updating stock data in db')
+        console.error('error updating stock data in db')
       } else {
-        console.log('successfully updated stock data to db')
+        console.log(`successfully updated ${data.ticker} data to db`)
       }
     });
   }

@@ -5,11 +5,22 @@ import axios from "axios";
 import styles from "../../../styles.css";
 
 const News: React.FC = () => {
-  const [latest, setLatest] = useState([]);
+  const [latestReddit, setLatest] = useState([]);
 
   useEffect(() => {
     getReddit();
+
   }, []);
+
+  const getFalcon = () => {
+    axios({
+      method: "get",
+      url:
+        "https://api.polygon.io/v1/meta/symbols/AAPL/news?perpage=50&page=1&apiKey=ktbj2shGj_Iz2moYDippfOyZCDQbBfHd",
+    }).then((response) => {
+      console.log('polygon', response);
+    });
+  };
 
   const getReddit = () => {
     axios({
@@ -49,7 +60,7 @@ const News: React.FC = () => {
         <button className={`${styles.newsButton} ${styles.redditBut}`}>Reddit: r/stocks</button>
         <button className={`${styles.newsButton} ${styles.wsbBut}`}>Reddit: r/wallstreetbets</button>
       </div>
-      <div className={styles.feed}>{latest}</div>
+      <div className={styles.feed}>{latestReddit}</div>
     </div>
   );
 };

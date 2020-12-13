@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   Tooltip,
@@ -24,22 +24,62 @@ const PageChart: React.FC<Props> = ({ stockData }) => {
   if (stockData.data.length > 0) {
     const timedPlotData = stockData.data.slice(99 - time);
     const start = stockData.data[99 - time].price;
+    const yesterday = stockData.data[98].price;
     const end = stockData.data[99].price;
-    const percent = (100 * ((end - start) / start)).toPrecision(2);
+    const percent = 100 * ((end - start) / start);
+    const daily = 100 * ((end - yesterday) / end);
 
     return (
       <div className={styles.graph}>
-        <ResponsiveContainer height={380}>
-          <LineChart
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            margin: "0px 0px 10px 0px",
+          }}
+        >
+          <div
+            style={{
+              fontWeight: "bolder",
+              fontSize: "26px",
+              margin: "0px 10px 0px 10px",
+            }}
+          >
+            {stockData.ticker}
+          </div>
+          <div style={{ textDecoration: "underline" }}>{stockData.name}</div>
+          <div style={{ display: "flex", marginLeft: "12px" }}>
+            <div>
+              {daily > 0 ? (
+                <span className={styles.pos}>&#8599;</span>
+              ) : (
+                <span className={styles.neg}>&#8600;</span>
+              )}
+            </div>
+            <div style={{ marginLeft: "5px" }}>{daily.toPrecision(2)}%</div>
+          </div>
+        </div>
+        <ResponsiveContainer height={350}>
+          <AreaChart
             className={styles.chart}
             data={timedPlotData}
             margin={{
               top: 0,
               right: 0,
-              left: -58,
+              left: -60,
               bottom: 0,
             }}
           >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor={end > start ? "#81cc6e" : "rgb(248, 110, 100)"}
+                  stopOpacity={0.1}
+                />
+                <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0.1} />
+              </linearGradient>
+            </defs>
             <XAxis stroke="white" dataKey="name" />
             <YAxis
               type="number"
@@ -51,33 +91,29 @@ const PageChart: React.FC<Props> = ({ stockData }) => {
               tick={false}
             />
             <Tooltip />
-            <Line
+            <Area
+              type="monotone"
               dataKey="price"
               stroke={end > start ? "#81cc6e" : "rgb(248, 110, 100)"}
-              dot={false}
               strokeWidth={2}
+              fillOpacity={1}
+              fill="url(#colorUv)"
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
-        <div className={styles.timeline}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              margin: "15px 0px",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: "bolder",
-                fontSize: "26px",
-                margin: "0px 10px 0px 10px",
-              }}
-            >
-              {stockData.ticker}
-            </div>
-            <div style={{ textDecoration: "underline" }}>{stockData.name}</div>
-          </div>
+        <div
+          className={styles.timeline}
+          style={{
+            background:
+              percent > 0
+                ? "linear-gradient(to right, rgb(132, 206, 72), rgb(27, 180, 40))"
+                : "linear-gradient(to right, rgb(248, 82, 82), rgb(199, 46, 135))",
+            boxShadow:
+              percent > 0
+                ? "rgba(79, 145, 53) 0px 3px 12px"
+                : "rgb(145, 53, 81) 0px 3px 12px",
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -90,33 +126,44 @@ const PageChart: React.FC<Props> = ({ stockData }) => {
             </div>
             <div style={{ display: "flex" }}>
               <div>
-                {percent > 0 ? (
-                  <span className={styles.pos}>&#8599;</span>
-                ) : (
-                  <span className={styles.neg}>&#8600;</span>
-                )}
+                {percent > 0 ? <span>&#8599;</span> : <span>&#8600;</span>}
               </div>
-              <div style={{ marginLeft: "5px" }}>{percent}%</div>
+              <div style={{ marginLeft: "5px" }}>{percent.toPrecision(2)}%</div>
             </div>
           </div>
           <div>
             <button
               className={styles.timelineBut}
-              style={{ color: time === 7 ? "#5ab361" : "" }}
+              style={{
+                background: time === 7 ? "white" : "none",
+                color: time === 7 ? "black" : "white",
+                boxShadow:
+                  time === 7 ? "rgba(0, 0, 0, 0.24) 1px 2px 4px" : "none",
+              }}
               onClick={() => setTime(7)}
             >
               1 week
             </button>
             <button
               className={styles.timelineBut}
-              style={{ color: time === 30 ? "#5ab361" : "" }}
+              style={{
+                background: time === 30 ? "white" : "none",
+                color: time === 30 ? "black" : "white",
+                boxShadow:
+                  time === 30 ? "rgba(0, 0, 0, 0.24) 1px 2px 4px" : "none",
+              }}
               onClick={() => setTime(30)}
             >
               1 month
             </button>
             <button
               className={styles.timelineBut}
-              style={{ color: time === 99 ? "#5ab361" : "" }}
+              style={{
+                background: time === 99 ? "white" : "none",
+                color: time === 99 ? "black" : "white",
+                boxShadow:
+                  time === 99 ? "rgba(0, 0, 0, 0.24) 1px 2px 4px" : "none",
+              }}
               onClick={() => setTime(99)}
             >
               3 months

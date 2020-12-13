@@ -39,6 +39,23 @@ body {
   overflow: scroll;
 }
 
+.col3 {
+  width: 24%;
+  padding: 60px 16px 0px 16px;
+  margin-right: 20px;
+  margin-top: 0px;
+  max-height: 620px;
+  overflow: scroll;
+}
+
+.col4 {
+  width: 76%;
+  padding: 60px 16px 0px 16px;
+  margin-top: 0px;
+  max-height: 620px;
+  overflow: scroll;
+}
+
 /*
   Header
   ==============================================
@@ -128,7 +145,7 @@ body {
 }
 
 .searchResults {
-  position: absolute;
+  position: relative;
   width: 416px;
   display: flex;
   flex-direction: column;
@@ -150,8 +167,6 @@ body {
 
 .searchItem:nth-last-child(1) {
   border-bottom: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .searchItem:hover {
@@ -361,8 +376,23 @@ body {
   margin: 40px 0px;
 }
 
-.feed {
+.pageNewsPost {
+  margin-bottom: 24px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 10px;
+  border-radius: 12px;
+  padding: 16px 20px 16px 20px;
+}
 
+.pagePostImage {
+  width: 200px;
+  margin-left: 30px;
+  border-radius: 8px;
+}
+.pagePostTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
 .newsOptions {
@@ -486,3 +516,23 @@ body {
   margin-bottom: 10px;
 }
 
+/*
+  Stock Details
+  ==============================================
+*/
+
+.pageStock {
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 10px;
+  border-radius: 12px;
+  padding-top: 4px;
+}
+
+.pageStockTitle {
+  border-radius: 12px;
+  color: white;
+  width: 60%;
+  height: 76px;
+  padding: 8px 0px 0px 12px;
+  margin: 0px 0px 0px 4px;
+}
