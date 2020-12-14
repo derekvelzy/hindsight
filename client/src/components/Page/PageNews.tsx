@@ -3,7 +3,11 @@ import PagePost from "./PagePost";
 import axios from "axios";
 import styles from "../../../../styles.css";
 
-const News: React.FC<Props> = () => {
+type Props = {
+  setPolygon: (arg: string) => void;
+};
+
+const News: React.FC<Props> = ({ setPolygon }) => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
@@ -12,27 +16,32 @@ const News: React.FC<Props> = () => {
 
   const getPolygon = () => {
     const ticker = location.pathname.split("/");
-    console.log(ticker);
     axios({
       method: "get",
       url: `https://api.polygon.io/v1/meta/symbols/${
         ticker[ticker.length - 1]
       }/news?perpage=50&page=1&apiKey=ktbj2shGj_Iz2moYDippfOyZCDQbBfHd`,
-    }).then((response) => {
-      const format = response.data.map((post) => (
-        <PagePost key={post.title} post={post} />
-      ));
-      setNews(format);
-    });
-  };
-
-  const searchReddit = (q: string) => {
-    axios({
-      method: "get",
-      url: `https://www.reddit.com/r/wallstreetbets/search.json?q=${q}`,
-    }).then((response) => {
-      console.log(response.data.data.children);
-    });
+    })
+      .then((response) => {
+        const format = response.data.map((post) => (
+          <PagePost key={post.title} post={post} />
+        ));
+        setNews(format);
+        return response;
+      })
+      .then((response) => {
+        let string = "";
+        response.data.forEach((article) => {
+          string += article.summary;
+        });
+        // axios({
+        //   method: "post",
+        //   url: `http://localhost:8020/polygon/${ticker[ticker.length - 1]}`,
+        //   data: { articles: string },
+        // }).then((score) => {
+        //   setPolygon(score);
+        // });
+      });
   };
 
   return (

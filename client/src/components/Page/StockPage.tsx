@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageChart from "./PageChart";
 import PageNews from "./PageNews";
 import PageStock from "./PageStock";
+import PageSentiment from "./PageSentiment";
 import axios from "axios";
 import styles from "../../../../styles.css";
 import { Link } from "react-router-dom";
@@ -13,6 +14,8 @@ const StockPage: React.FC = () => {
     shares: 0,
     data: [],
   });
+  const [twitter, setTwitter] = useState("0.5");
+  const [polygon, setPolygon] = useState("-0.2");
 
   useEffect(() => {
     const relative = window.location.pathname.split("/");
@@ -24,24 +27,35 @@ const StockPage: React.FC = () => {
     axios({
       method: "get",
       url: `http://localhost:8020/one/${ticker}`,
-    }).then((response) => {
-      console.log(response);
-      const info = response.data[0];
-      const data = info.data.map((point) => {
-        return {
-          name: point[0].date.substring(5),
-          uv: point[0].cost,
-          price: point[0].cost,
+    })
+      .then((response) => {
+        console.log(response);
+        const info = response.data[0];
+        const data = info.data.map((point) => {
+          return {
+            name: point[0].date.substring(5),
+            uv: point[0].cost,
+            price: point[0].cost,
+          };
+        });
+        const object = {
+          ticker: info.ticker,
+          name: info.name,
+          shares: info.shares,
+          data: data,
         };
+        setStockData(object);
+        return object;
+      })
+      .then((stock) => {
+        // axios({
+        //   method: "get",
+        //   url: `http://localhost:8020/twitter/${stock.ticker}`,
+        // }).then((score) => {
+        //   console.log('new score', score);
+        //   setTwitter(score);
+        // });
       });
-      const object = {
-        ticker: info.ticker,
-        name: info.name,
-        shares: info.shares,
-        data: data,
-      };
-      setStockData(object);
-    });
   };
 
   return (
@@ -57,7 +71,8 @@ const StockPage: React.FC = () => {
         </div>
         <div className={styles.col4}>
           <PageChart stockData={stockData} />
-          <PageNews />
+          <PageSentiment twitter={twitter} polygon={polygon} />
+          <PageNews setPolygon={setPolygon} />
         </div>
       </div>
     </div>

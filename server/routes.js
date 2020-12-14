@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const controller = require('../db/controller/controller.js');
 const dateController = require('../db/controller/dateController.js');
+const sentiment = require('../db/controller/sentiments.js');
 
 // routes
 router.post('/requests', controller.post);
@@ -11,7 +12,11 @@ router.put('/requests', controller.put);
 
 router.patch('/requests', controller.patch);  // Updates the total shares
 
-router.get('/one/:id', controller.getOne)
+router.get('/one/:id', controller.getOne);
+
+router.get('/twitter/:ticker', sentiment.twitter);
+
+router.post('/polygon/:ticker', sentiment.polygon);
 
 // router.patch('/updates', controller.update);
 

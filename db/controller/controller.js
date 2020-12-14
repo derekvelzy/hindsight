@@ -3,7 +3,6 @@ const dateModel = require('../models/dateModel.js');
 const axios = require('axios');
 const apiKey = "721H17JOIS0DYUYS";
 
-
 module.exports = {
   post: function(req, res) {
     model.addStock(req.body, (err) => {
@@ -19,11 +18,11 @@ module.exports = {
   get: function(req, res) {
     var theDate = new Date().toLocaleDateString();
     dateModel.getDate((err, date) => {
-      console.log('date!!!!!!', date)
+      // console.log('date!!!!!!', date)
       if (err) {
         res.sendStatus(400);
       } else if (date[0].date === theDate) {
-        console.log('not neww', date, theDate);
+        // console.log('not neww', date, theDate);
         model.getAll((err, results) => {
           if (err) {
             res.sendStatus(400);
@@ -111,5 +110,5 @@ module.exports = {
       console.log('hh')
     })
     // res.sendStatus(200);
-  }
+  },
 }

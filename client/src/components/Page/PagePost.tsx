@@ -6,7 +6,6 @@ type Props = {
 };
 
 const PagePost: React.FC<Props> = ({ post }) => {
-  console.log(post);
   return (
     <div className={styles.pageNewsPost}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
