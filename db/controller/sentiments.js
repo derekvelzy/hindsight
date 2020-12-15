@@ -1,5 +1,6 @@
 const Twitter = require('twitter-lite');
 const language = require('@google-cloud/language');
+const keys = require('./keys.js');
 const languageClient = new language.LanguageServiceClient();
 
 async function getSentiment(text) {
@@ -17,13 +18,13 @@ module.exports = {
     console.log('carne asada', req.params);
 
     const user = new Twitter({
-      consumer_key: "KPRZ6lq7dIio9AzzfssObguyc",
-      consumer_secret: "gonQC9wlMczjuCDRgQm0BhbtJg8bDm1EOCReplNTULHldYGEIL",
+      consumer_key: keys.consumer_key,
+      consumer_secret: keys.consumer_secret,
     });
 
     try {
       const app = new Twitter({
-          bearer_token: "AAAAAAAAAAAAAAAAAAAAAOCEKgEAAAAAz3bsZnvwclomxnQN2ATLuJZMN2Q%3DuaHVcjk7dbhQxFPAdSHp8RpT7JHXP1oZHcKuWn7mMdJJ3Uyz6f",
+          bearer_token: keys.bearer_token,
       });
       response = await app.get(`/search/tweets`, {
           q: req.params.ticker,

@@ -221,7 +221,6 @@ const Home: React.FC<Props> = ({ mode, setMode }) => {
         <div className={styles.col2}>
           <Chart plotData={plotData} chartView={chartView} />
           <Breakdown portfolio={portfolio} myPlotData={myPlotData} />
-          <News />
         </div>
       </div>
     </div>

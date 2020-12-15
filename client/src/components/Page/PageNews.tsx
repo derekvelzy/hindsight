@@ -34,13 +34,14 @@ const News: React.FC<Props> = ({ setPolygon }) => {
         response.data.forEach((article) => {
           string += article.summary;
         });
-        // axios({
-        //   method: "post",
-        //   url: `http://localhost:8020/polygon/${ticker[ticker.length - 1]}`,
-        //   data: { articles: string },
-        // }).then((score) => {
-        //   setPolygon(score);
-        // });
+        axios({
+          method: "post",
+          url: `http://localhost:8020/polygon/${ticker[ticker.length - 1]}`,
+          data: { articles: string },
+        }).then((score) => {
+          console.log(typeof score.data, score)
+          setPolygon(score.data);
+        });
       });
   };
 

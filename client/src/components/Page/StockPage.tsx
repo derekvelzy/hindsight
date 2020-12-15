@@ -14,8 +14,8 @@ const StockPage: React.FC = () => {
     shares: 0,
     data: [],
   });
-  const [twitter, setTwitter] = useState("0.5");
-  const [polygon, setPolygon] = useState("-0.2");
+  const [twitter, setTwitter] = useState(0);
+  const [polygon, setPolygon] = useState(0);
 
   useEffect(() => {
     const relative = window.location.pathname.split("/");
@@ -48,13 +48,13 @@ const StockPage: React.FC = () => {
         return object;
       })
       .then((stock) => {
-        // axios({
-        //   method: "get",
-        //   url: `http://localhost:8020/twitter/${stock.ticker}`,
-        // }).then((score) => {
-        //   console.log('new score', score);
-        //   setTwitter(score);
-        // });
+        axios({
+          method: "get",
+          url: `http://localhost:8020/twitter/${stock.ticker}`,
+        }).then((score) => {
+          console.log('new score', typeof score.data, score);
+          setTwitter(score.data);
+        });
       });
   };
 

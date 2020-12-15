@@ -41,6 +41,8 @@ const Breakdown: React.FC<Props> = ({ portfolio, myPlotData }) => {
         ((stock.data[99].cost * stock.shares) / myPlotData.data[99].cost)
       ).toString();
       const perString = percent.substring(0, percent.indexOf(".") + 3);
+      const cost = (stock.data[99].cost * stock.shares).toString();
+      const costString = cost.substring(0, cost.indexOf(".") + 3);
       i += 1;
       return (
         <div
@@ -65,7 +67,7 @@ const Breakdown: React.FC<Props> = ({ portfolio, myPlotData }) => {
             <div>{stock.name}</div>
           </div>
           <div>
-            ${stock.data[99].cost * stock.shares} / {perString}%
+            ${costString} / {perString}%
           </div>
         </div>
       );

@@ -21,8 +21,8 @@ const PageSentiment: React.FC<Props> = ({ twitter, polygon }) => {
   const data = [
     {
       name: "sentiment",
-      twitter: Number.parseFloat(twitter),
-      polygon: Number.parseFloat(polygon),
+      twitter: twitter,
+      polygon: polygon,
     },
   ];
   return (
@@ -41,7 +41,7 @@ const PageSentiment: React.FC<Props> = ({ twitter, polygon }) => {
               margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
             >
               <XAxis dataKey="name" />
-              <YAxis />
+              <YAxis domain={[-1, 1]} />
               <Tooltip />
               <ReferenceLine y={0} stroke="#000" />
               <Bar dataKey="polygon" fill="#6b5cf2" />
