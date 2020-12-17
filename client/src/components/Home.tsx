@@ -13,7 +13,7 @@ interface StockShape {
   name: string;
   ticker: string;
   shares: number;
-  data: { date: string; cost: number; volume: number }[];
+  data: { date: string; cost: number }[];
 }
 
 type Props = {
@@ -97,7 +97,7 @@ const Home: React.FC<Props> = ({ mode, setMode }) => {
         coords.unshift({
           date: key,
           cost: data["data"]["Time Series (Daily)"][key]["4. close"],
-          volume: data["data"]["Time Series (Daily)"][key]["6. volume"],
+          // volume: data["data"]["Time Series (Daily)"][key]["6. volume"],
         });
       }
       const object = {

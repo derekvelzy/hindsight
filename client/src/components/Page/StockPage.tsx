@@ -52,7 +52,7 @@ const StockPage: React.FC = () => {
           method: "get",
           url: `http://localhost:8020/twitter/${stock.ticker}`,
         }).then((score) => {
-          console.log('new score', typeof score.data, score);
+          console.log("new score", typeof score.data, score);
           setTwitter(score.data);
         });
       });
@@ -60,7 +60,10 @@ const StockPage: React.FC = () => {
 
   return (
     <div>
-      <div className={`${styles.header} ${styles.headerContents}`}>
+      <div
+        style={{ position: "fixed" }}
+        className={`${styles.header} ${styles.headerContents}`}
+      >
         <Link to="/" className={styles.logo} style={{ textDecoration: "none" }}>
           hindsight
         </Link>

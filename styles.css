@@ -18,42 +18,45 @@ body {
 }
 
 .columns {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
 }
 
 .col1 {
-  width: 38%;
+  /* width: 28.5%; */
+  width: 410px;
   padding: 30px 16px 0px 16px;
-  margin-right: 20px;
+  margin-right: 40px;
   margin-top: 60px;
-  max-height: 620px;
+  max-height: calc(100% - 100px);
   overflow: scroll;
+  position: fixed;
 }
 
 .col2 {
-  width: 62%;
+  width: 58%;
+  /* width: 62%; */
   padding: 30px 16px 0px 16px;
   margin-top: 60px;
-  max-height: 620px;
-  overflow: scroll;
+  float: right;
 }
 
 .col3 {
-  width: 24%;
+  /* width: 20%; */
   padding: 60px 16px 0px 16px;
-  margin-right: 20px;
-  margin-top: 0px;
-  max-height: 620px;
+  margin: 40px 40px 40px 0px;
+  max-height: calc(100% - 100px);
   overflow: scroll;
+  position: fixed;
 }
 
 .col4 {
-  width: 76%;
+  width: 70%;
   padding: 60px 16px 0px 16px;
-  margin-top: 0px;
-  max-height: 620px;
-  overflow: scroll;
+  margin-top: 34px;
+  /* max-height: 620px; */
+  /* overflow: scroll; */
+  float: right;
 }
 
 /*
@@ -146,7 +149,7 @@ body {
 
 .searchResults {
   position: relative;
-  width: 416px;
+  width: 409px;
   display: flex;
   flex-direction: column;
   margin-top: -16px;
@@ -526,6 +529,8 @@ body {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 10px;
   border-radius: 12px;
   padding-top: 4px;
+  width: 274px;
+  margin-bottom: 40px;
 }
 
 .pageStockTitle {
@@ -535,6 +540,15 @@ body {
   height: 76px;
   padding: 8px 0px 0px 12px;
   margin: 0px 0px 0px 4px;
+}
+
+.marketValue {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  border: 2px solid rgb(65, 71, 82);
+  border-radius: 8px;
+  width: 220px;
 }
 
 /*
