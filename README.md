@@ -4,10 +4,10 @@
 This app was created to introduce people into the world of stock trading in a way where they wouldn't lose real money. I found it difficult to start trading stocks and I know there are plenty of other people out there who feel the same way.
 
 ## Screenshots ##
-![Hindsight Home](https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/Hindsight_Home.png)
-![Hindsight Buy/Sell](https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/Hindsight_buysell.png)
-![Hindsight Search](https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/Hinsight_search.png)
-![Hindsight News](https://derekvelzy-website-images.s3-us-west-1.amazonaws.com/Hinsight_news.png)
+![Hindsight Home](https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/Hindsight_Home.png)
+![Hindsight Buy/Sell](https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/Hindsight_buysell.png)
+![Hindsight Search](https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/Hinsight_search.png)
+![Hindsight News](https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/Hinsight_news.png)
 
 ## Features ##
 - The user will be able to view an interactive chart that shows their historical portfolio performance, as well as any publicly traded company they select.
