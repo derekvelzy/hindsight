@@ -8,7 +8,7 @@
     "build": "webpack --mode production --env.production --progress",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
-    "start": "GOOGLE_APPLICATION_CREDENTIALS='./hindsight-adb09c87b1e4.json' nodemon server/app.js"
+    "start": "nodemon server/app.js"
   },
   "author": "Beth Johnson",
   "license": "ISC",
